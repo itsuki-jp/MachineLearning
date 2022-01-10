@@ -10,7 +10,7 @@ def f( x ):
     :param x:予測データ
     :return: 予測された値
     """
-    return np.dot(x, theta)
+    return np.dot(theta, x)
 
 
 def E( x, y ):
