@@ -80,7 +80,7 @@ sigma = train_x.std()
 train_z = standardize(train_x)
 
 #  ----------  多項式回帰  ----------
-N = 3  # パラメータ数
+N = 3  # N次の多項式
 
 theta = np.random.rand(N)
 X = to_matrix(train_z)
