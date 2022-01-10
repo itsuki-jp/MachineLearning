@@ -1,3 +1,9 @@
+# 線形回帰
+
+```math
+e^{i\pi} = -1
+```
+
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
@@ -73,7 +79,6 @@ sigma = train_x.std()
 train_z = standardize(train_x)
 
 update()
-
 
 X = np.linspace(-3, 3, 100)
 plt.plot(train_z, train_y, "o")
