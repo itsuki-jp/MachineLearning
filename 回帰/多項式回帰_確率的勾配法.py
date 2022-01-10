@@ -45,19 +45,17 @@ def update():
     EPS = 10 ** -6  # 終了条件：誤差がこれより小さくなったら終了する
     ETA = 10 ** -3  # 学習率
     diff = 1
-    count = 0  # 何回更新したか
     global theta
-    error = E(X, train_y)
+    errors.append(MSE(X, train_y))
     while diff > EPS:
-        errors.append(error)
-        #  パラメータを更新
-        theta = theta - ETA * np.dot(f(X) - train_y, X)
+        #  学習データを並べるためにランダムな順列を用意
+        p = np.random.permutation(X.shape[0])
+        #  学習データをランダムに取り出して、確率的勾配法でパラメータを更新
+        for x, y in zip(X[p, :], train_y[p]):
+            theta = theta - ETA * (f(x) - y) * x
         #  誤差の計算
-        current_error = E(X, train_y)
-        diff = error - current_error
-        error = current_error
-
-        count += 1
+        errors.append(MSE(X, train_y))
+        diff = errors[-2] - errors[-1]
 
 
 def to_matrix( x ):
@@ -72,7 +70,7 @@ def to_matrix( x ):
     return np.vstack(temp).T
 
 
-train = np.loadtxt("files/click.csv", delimiter=",", skiprows=1)
+train = np.loadtxt("click.csv", delimiter=",", skiprows=1)
 train_x = train[:, 0]
 train_y = train[:, 1]
 

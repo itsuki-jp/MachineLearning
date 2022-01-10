@@ -59,7 +59,7 @@ def update():
         print(f"{count} 回目: theta0 = {theta0}, theta1 = {theta1}, diff = {diff}")
 
 
-train = np.loadtxt("files/click.csv", delimiter=",", skiprows=1)
+train = np.loadtxt("click.csv", delimiter=",", skiprows=1)
 train_x = train[:, 0]
 train_y = train[:, 1]
 
