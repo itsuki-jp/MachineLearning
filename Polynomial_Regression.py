@@ -30,18 +30,25 @@ def standardize( x ):
     return (x - mu) / sigma
 
 
+def MSE( x, y ):
+    """平均二乗誤差を求める
+    """
+    return (1 / x.shape[0]) * np.sum((y - f(x)) ** 2)
+
+
 def update():
     """パラメータを更新する
 
     :return: None
     """
-    EPS = 10 ** -2  # 終了条件：誤差がこれより小さくなったら終了する
+    EPS = 10 ** -6  # 終了条件：誤差がこれより小さくなったら終了する
     ETA = 10 ** -3  # 学習率
     diff = 1
     count = 0  # 何回更新したか
     global theta
     error = E(X, train_y)
     while diff > EPS:
+        errors.append(error)
         #  パラメータを更新
         theta = theta - ETA * np.dot(f(X) - train_y, X)
         #  誤差の計算
@@ -79,9 +86,16 @@ N = 3  # パラメータ数
 theta = np.random.rand(N)
 X = to_matrix(train_z)
 
+#  ----------  平均二乗誤差  ----------
+errors = []  # 誤差の履歴
+
 update()
 
 x_axis = np.linspace(-3, 3, 100)
+#  多項式回帰
 plt.plot(train_z, train_y, "o")
 plt.plot(x_axis, f(to_matrix(x_axis)))
+
+# MSEを表示
+# plt.plot(np.arange(len(errors)), errors)
 plt.show()
