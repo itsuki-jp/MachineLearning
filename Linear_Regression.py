@@ -12,7 +12,7 @@ def f( x ):
 
 
 def E( x, y ):
-    """目的関数（最小にしたい、予測関数が1次関数だとする）
+    """目的関数、誤差（最小にしたい、予測関数が1次関数だとする）
 
     :param x: 学習データ
     :param y: 学習データ
@@ -31,11 +31,15 @@ def standardize( x ):
 
 
 def update():
+    """パラメータを更新する
+
+    :return: None
+    """
     global theta0, theta1
-    EPS = 10 ** -2
-    ETA = 10 ** -3
+    EPS = 10 ** -2  # 終了条件：誤差がこれより小さくなったら終了する
+    ETA = 10 ** -3  # 学習率
     diff = 1
-    count = 0
+    count = 0  # 何回更新したか
 
     error = E(train_z, train_y)
     while diff > EPS:
@@ -69,8 +73,8 @@ train_z = standardize(train_x)
 
 update()
 
-X = np.linspace(-3, 3, 100)
 
+X = np.linspace(-3, 3, 100)
 plt.plot(train_z, train_y, "o")
 plt.plot(X, f(X))
 plt.show()
