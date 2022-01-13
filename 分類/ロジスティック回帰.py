@@ -35,5 +35,7 @@ epoch = 5000  # 繰り返し回数
 for _ in range(epoch):
     theta = theta - ETA * np.dot(f(X) - train_y, X)
 
-test = np.array([5.1, 2.5, 3.0, 1.1])
-print("versicolor" if classify(to_matrix(np.array([test]))) else "setosa")
+test = np.array([5.0, 3.6, 1.4, 0.2])
+res = f(to_matrix(np.array([test])))
+print(res)
+print("versicolor" if res >= 0.5 else "setosa")
